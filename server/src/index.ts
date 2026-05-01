@@ -12,8 +12,10 @@ import { chatRouter } from './routes/chat.js';
 import { translateRouter } from './routes/translate.js';
 import { placesRouter } from './routes/places.js';
 import { calendarRouter } from './routes/calendar.js';
+import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
+app.set('trust proxy', 1);
 const PORT = process.env.PORT || 3001;
 
 app.use(helmet());
@@ -40,6 +42,8 @@ app.use(express.static(clientDistPath));
 app.get('*', (req, res) => {
   res.sendFile(path.join(clientDistPath, 'index.html'));
 });
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
