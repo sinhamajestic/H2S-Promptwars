@@ -16,7 +16,7 @@ export const PollingMap: React.FC<PollingMapProps> = ({ address }) => {
     const loadMap = async () => {
       try {
         // Fetch API key securely from backend
-        const res = await fetch('http://localhost:3001/api/places/config');
+        const res = await fetch('/api/places/config');
         if (!res.ok) throw new Error('Failed to fetch Maps config');
         const { apiKey } = await res.json();
 

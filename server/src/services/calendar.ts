@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_OAUTH_CLIENT_ID,
   process.env.GOOGLE_OAUTH_CLIENT_SECRET,
-  'http://localhost:3001/api/calendar/callback'
+  process.env.OAUTH_REDIRECT_URI || 'http://localhost:3001/api/calendar/callback'
 );
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_for_dev';

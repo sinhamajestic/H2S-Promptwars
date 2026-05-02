@@ -14,7 +14,7 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({ title, date, descrip
 
   useEffect(() => {
     // Check if user is connected
-    fetch('http://localhost:3001/api/calendar/status', { credentials: 'include' })
+    fetch('/api/calendar/status', { credentials: 'include' })
       .then(res => res.json())
       .then(data => setIsConnected(!!data.connected))
       .catch(() => setIsConnected(false));
@@ -22,13 +22,13 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({ title, date, descrip
 
   const handleAdd = async () => {
     if (!isConnected) {
-      window.location.href = 'http://localhost:3001/api/calendar/auth';
+      window.location.href = '/api/calendar/auth';
       return;
     }
 
     setIsAdding(true);
     try {
-      const res = await fetch('http://localhost:3001/api/calendar/event', {
+      const res = await fetch('/api/calendar/event', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -40,7 +40,7 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({ title, date, descrip
         setEventLink(data.eventLink);
       } else if (res.status === 401) {
         // Token might have expired
-        window.location.href = 'http://localhost:3001/api/calendar/auth';
+        window.location.href = '/api/calendar/auth';
       }
     } catch (e) {
       console.error(e);

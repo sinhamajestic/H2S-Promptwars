@@ -29,7 +29,7 @@ calendarRouter.get('/callback', async (req, res) => {
     });
 
     // Redirect back to the frontend
-    res.redirect('http://localhost:5173');
+    res.redirect('/');
   } catch (error) {
     console.error('Error during calendar callback:', error);
     res.status(500).send('Authentication failed');
